@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var requireAuth = passport.authenticate('jwt', { session: false });
 
-router.get('/cget_profiles/:email', requireAuth, function (req, res) {
+router.get('/cget_profiles/:email', function (req, res) {
     console.log("In get profiles: " + req.params.email)
     var data={
         email:req.params.email,
