@@ -12,7 +12,9 @@ class BookingHistory extends Component {
         this.state = {
             bookings:[],
             name:localStorage.getItem('email'),
-            Booked_dates:""
+            Booked_dates:"",
+            currentPage: 1,
+            todosPerPage: 5,
         }
 
     }
@@ -37,10 +39,31 @@ class BookingHistory extends Component {
             
     }
 
-
+    handleClick = (event) => {
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
+    }
+    
     render(){
+        const { bookings, currentPage, todosPerPage } = this.state;
+        const indexOfLastTodo = currentPage * todosPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+        const bookings1 = bookings.slice(indexOfFirstTodo, indexOfLastTodo);
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(bookings.length / todosPerPage); i++) {
+            pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+            return (
+                <li class="page-item"><a class="page-link" key={number}
+                    id={number}
+                    onClick={this.handleClick}>{number}</a></li>
+            );
+        });
         //iterate over Bookings to create a table row
-         let details = this.state.bookings.map(booking => {
+         let details = bookings1.map(booking => {
              return(
                  <tr>
                      <td>{booking.headline}</td>
@@ -81,7 +104,13 @@ class BookingHistory extends Component {
                                 {details}
                             </tbody>
                         </table>
-                       
+                        <div className="col-lg-9 col-lg-offset-3">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                {renderPageNumbers}
+                            </ul>
+                        </nav>
+                    </div>
                 </div> 
             </div> 
         )

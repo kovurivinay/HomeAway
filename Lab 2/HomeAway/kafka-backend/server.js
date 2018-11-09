@@ -42,8 +42,8 @@ function handleTopicRequest(topic_name,fname){
 //first argument is topic name
 //second argument is a function that will handle this topic request
 //handleTopicRequest("post_message",Books)
-handleTopicRequest("search",Search)
-handleTopicRequest("searchprop",SearchProp)
+handleTopicRequest("search1",Search)
+handleTopicRequest("searchprop1",SearchProp)
 handleTopicRequest("getprofile",GetProfile)
 handleTopicRequest("setprofile",SetProfile)
 

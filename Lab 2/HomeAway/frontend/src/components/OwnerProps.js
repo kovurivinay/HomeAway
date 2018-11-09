@@ -10,7 +10,9 @@ class OwnerProps extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            props:[]
+            props:[],
+            currentPage: 1,
+            todosPerPage: 5,
         }
 
     }
@@ -35,11 +37,32 @@ class OwnerProps extends Component {
 
 
     }
-
+    handleClick = (event) => {
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
+    }
 
     render() {
+        const { props, currentPage, todosPerPage } = this.state;
+        const indexOfLastTodo = currentPage * todosPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+        const prop = props.slice(indexOfFirstTodo, indexOfLastTodo);
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(props.length / todosPerPage); i++) {
+            pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+            return (
+                <li class="page-item"><a class="page-link" key={number}
+                    id={number}
+                    onClick={this.handleClick}>{number}</a></li>
+            );
+        });
+        
         //iterate over Bookings to create a table row
-        let details = this.state.props.map(booking => {
+        let details = prop.map(booking => {
             return (
                 <tr>
                     <td>{booking.headline}</td>
@@ -79,6 +102,13 @@ class OwnerProps extends Component {
                             {details}
                         </tbody>
                     </table>
+                    <div className="col-lg-9 col-lg-offset-3">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {renderPageNumbers}
+                    </ul>
+                </nav>
+            </div>
 
                 </div>
 

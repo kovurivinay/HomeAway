@@ -73,6 +73,7 @@ var get_properties = require('./routes/get_properties.js');
 var get_profiles = require('./routes/get_profiles.js');
 var set_profiles = require('./routes/set_profiles.js');
 var propertydb = require('./routes/propertydb.js');
+var messages = require('./routes/messages.js');
 
 app.use('/',clogin)
 app.use('/',cSignup)
@@ -86,6 +87,7 @@ app.use('/',get_properties)
 app.use('/',get_profiles)
 app.use('/',set_profiles)
 app.use('/',propertydb)
+app.use('/',messages)
 // $or: [
 //     { 'name.first' : /^G/ },
 //     { birth: { $lt: new Date('01/01/1945') } }

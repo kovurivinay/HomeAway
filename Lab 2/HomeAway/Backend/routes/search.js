@@ -3,7 +3,7 @@ var kafka = require('../kafka/client');
 
 router.post('/search', function (req, res) {
     console.log("Searching for properties")
-    kafka.make_request('search', req.body, (err, results) => {
+    kafka.make_request('search1', req.body, (err, results) => {
         console.log("In node kf --> Post Message Handler")
         if (err) {
             console.log("Error occured")

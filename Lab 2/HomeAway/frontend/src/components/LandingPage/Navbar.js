@@ -52,6 +52,7 @@ class Navbar extends Component {
                             <li><a href='/BookingHistory'>Trip History</a></li>
                         </ul>
                     </li>
+                    <li><div><i className="fas fa-envelope fa-2x margin-top-messages" onClick={this.messagesButton}></i></div></li>
                     <li className="cblue"><Link to="/ListProp">List Your Property</Link></li>
                     <li><Link to="" onClick={this.handleLogout1.bind(this)}><span className="glyphicon glyphicon-user"></span>Logout</Link></li>
                 </ul>

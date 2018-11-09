@@ -4,7 +4,7 @@ var kafka = require('../kafka/client');
 router.post('/searchprop', function (req, res) {
     console.log("Inside Traveler Login Post Request");
     //console.log(req.body.username)
-    kafka.make_request('searchprop', req.body, (err, results) => {
+    kafka.make_request('searchprop1', req.body, (err, results) => {
         console.log("In node kf --> Post Message Handler")
         if (err) {
             console.log("Error occured")

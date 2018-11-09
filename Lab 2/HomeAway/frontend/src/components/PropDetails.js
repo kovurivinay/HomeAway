@@ -113,6 +113,20 @@ class PropDetails extends Component {
         })
     }
 
+    send = (e)=>{
+        const data={
+            message:this.state.message,
+            from: localStorage.getItem('email'),
+            to: this.state.prs.owner,
+        }
+        axios.post(Node_IP+Node_Port+'/messages',data)
+        .then(res => {
+            console.log("message sent")
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
     render() {
         var photos = []
         if (this.state.photos.length > 0) {
@@ -198,11 +212,11 @@ class PropDetails extends Component {
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <textarea onChange={this.change} className="details_item form-control" name="messageOwner" placeholder="Message to the Owner"></textarea><br></br>
+                                            <textarea onChange={this.change} className="details_item form-control" name="message" placeholder="Message to the Owner"></textarea><br></br>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Send</button>
+                                            <button type="button" onClick={this.send} class="btn btn-primary">Send</button>
                                         </div>
                                     </div>
                                 </div>
